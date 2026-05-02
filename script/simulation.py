@@ -11,16 +11,16 @@ dt = 0.01             # Small sampling time for stability
 # --- PID Gains (Your "Perfect Spot" Knobs) ---
 # Start with these and tune as we discussed: 
 # Increase Kp for strength, Kd to stop shaking, Ki for precision [cite: 14, 16, 26, 27, 29]
-Kp = 10.0  
-Ki = 0.1   
-Kd = 1.0   
+Kp = 0.0
+Ki = 0.0  
+Kd = 0.0
 
 # --- Limits ---
 MAX_TORQUE = 2.0      # Motor torque limit (Nm) [cite: 32]
-MAX_RPM = 5000        # Motor speed saturation limit 
+MAX_RPM = 300       # Motor speed saturation limit 
 
 # --- Initial State ---
-theta = 0.1           # Initial tilt angle (radians)
+theta = 0.00          # Initial tilt angle (radians)
 theta_dot = 0.0       # Initial angular velocity
 wheel_speed_rpm = 0.0
 error_sum = 0.0
@@ -38,7 +38,7 @@ for t in time_range:
     error_rate = (error - last_error) / dt
     
     # 2. PID Control Output (Torque) [cite: 26, 28, 29]
-    torque = (Kp * error) + (Ki * error_sum) + (Kd * error_rate)
+    torque = -((Kp * error) + (Ki * error_sum) + (Kd * error_rate))
     
     # 3. Apply Saturation (The "Research Problem") [cite: 2, 32]
     torque = np.clip(torque, -MAX_TORQUE, MAX_TORQUE)
