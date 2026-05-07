@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<robot name="rwsr_robot">
+
+  <!-- MATERIALS -->
+
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.1 0.1 0.1 1"/>
+  </material>
+
+  <!-- BASE LINK -->
+
+  <link name="base_link">
+
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.20"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.20"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="1.0"/>
+
+      <origin xyz="0 0 0"/>
+
+      <inertia
+        ixx="0.01"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.01"
+        iyz="0.0"
+        izz="0.01"/>
+    </inertial>
+
+  </link>
+
+  <!-- REACTION WHEEL -->
+
+  <link name="reaction_wheel">
+
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.3"/>
+
+      <origin xyz="0 0 0"/>
+
+      <inertia
+        ixx="0.001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.001"
+        iyz="0.0"
+        izz="0.001"/>
+    </inertial>
+
+  </link>
+
+  <!-- JOINT -->
+
+  <joint name="reaction_wheel_joint" type="continuous">
+
+    <parent link="base_link"/>
+    <child link="reaction_wheel"/>
+
+    <origin xyz="0 0 0.08" rpy="1.5707 0 0"/>
+
+    <axis xyz="0 0 1"/>
+    
+    <limit effort="10" velocity="100"/>
+    
+  </joint>
+  
+  <!-- GAZEBO ROS2 CONTROL -->
+
+  <gazebo>
+    <plugin
+      filename="gz-sim-joint-controller-system"
+      name="gz::sim::systems::JointController">
+    </plugin>
+  </gazebo>
+  
+</robot>
