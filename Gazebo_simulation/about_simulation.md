@@ -6,3 +6,12 @@ These 3D simulations helps us to create an artifical environment where we can te
 
 #My progress:-
 As im trying to learn basics of gazebo but first wanted to create a 3D model of my research RWSR reaction wheel stabilization robot and from my last commit im working on this 3D simulation and decided to upload the current work progress 
+
+#Whats included:
+initial urdf model of rwsrobot full simulation is in progress
+
+#Simulation setup:
+OS: Ubuntu 24.04 (WSL2)
+ROS version: Jazzy
+Gazebo version: Harmonic
+
