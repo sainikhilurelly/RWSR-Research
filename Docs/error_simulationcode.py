@@ -38,7 +38,7 @@ for t in time_range:
     error_rate = (error - last_error) / dt
     
     # 2. PID Control Output (Torque) [cite: 26, 28, 29]
-    torque = (Kp * error) + (Ki * error_sum) + (Kd * error_rate) #this is the error i found
+    torque = (Kp * error) + (Ki * error_sum) + (Kd * error_rate) #this is the error i found because of this code mistake simulation wasnt worked properly
     
     # 3. Apply Saturation (The "Research Problem") [cite: 2, 32]
     torque = np.clip(torque, -MAX_TORQUE, MAX_TORQUE)
